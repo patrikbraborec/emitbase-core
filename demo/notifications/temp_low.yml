@@ -1,0 +1,4 @@
+temp_low:
+  email:
+    reciever: 'patrikbraborec@gmail.com'
+    message: 'the temperature is too low'

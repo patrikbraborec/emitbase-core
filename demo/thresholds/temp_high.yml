@@ -1,0 +1,3 @@
+temp_high:
+  expression: 'select * from demo where temp > 10'
+  cron: '* * * * *'
