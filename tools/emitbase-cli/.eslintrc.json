@@ -1,18 +1,18 @@
 {
-  
+  "root": true,
   "env": {
     "browser": false,
     "es6": true,
     "node": true
   },
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": ["tools/**/*"],
+  "ignorePatterns": ["../../src/**/*"],
   "parserOptions": {
     "project": "tsconfig.json",
     "sourceType": "module",
     "ecmaVersion": 2020
   },
-  "plugins": ["@typescript-eslint", "jest"],
+  "plugins": ["@typescript-eslint"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:jest/recommended", "prettier"],
   "rules": {
     // The following rule is enabled only to supplement the inline suppression

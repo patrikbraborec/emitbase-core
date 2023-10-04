@@ -30,14 +30,19 @@ export function registerThreshold(
   selectedNotificationsConnectionDetails: EmailConnectionDetails,
 ): void {
   jobs.forEach((job) => {
-    const isCronValid = nodeCron.validate(job.cron);
+    try {
+      const isCronValid = nodeCron.validate(job.cron);
 
-    if (isCronValid) {
-      nodeCron.schedule(job.cron, () => {
-        runJob(job, selectedDatabaseConnectionDetails, selectedNotificationsConnectionDetails);
-      });
-    } else {
+      if (isCronValid) {
+        nodeCron.schedule(job.cron, () => {
+          runJob(job, selectedDatabaseConnectionDetails, selectedNotificationsConnectionDetails);
+        });
+      } else {
+        throw new Error(`cron ${job.cron} is not valid`);
+      }
+    } catch (error) {
       console.error(`cron ${job.cron} is not valid`);
+      throw error;
     }
   });
 }
