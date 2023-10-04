@@ -22,6 +22,6 @@ COPY package*.json ./
 RUN npm ci --production
 
 COPY --from=builder /app/build ./build
+COPY --from=builder /app/demo ./demo
 
-EXPOSE 8080
 CMD [ "npm", "start" ]
