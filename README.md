@@ -71,10 +71,24 @@ Well, I love the idea of building things in public. Also, I know that I can some
 
 The `0.0.1-alpha` is truly alpha, and there is still a lot of work to be done! The following list contains a high-level plan for the next steps (to actually release `0.0.1`):
 
-- [ ] Docker image (right now, the Docker image is not working properly)
+- [x] Docker image (right now, the Docker image is not working properly)
 - [ ] CLI (a CLI tool would create a demo-like folder with a built-in Docker file that you could run)
 - [ ] Slack messaging
 - [ ] Validation (there is missing validation for almost all inputs)
 - [ ] Ensure that Emitbase performs only `SELECT` queries.
 - [ ] Tests for core functionalities
 - [ ] Documentation
+
+## Run Emitbase in Docker
+
+1. Build docker image:
+
+```bash
+$ docker build -t emitbase-v0.0.1-alpha
+```
+
+2. Run it:
+
+```bash
+$ docker run -p 3000:3000 emitbase-v0.0.1-alpha
+```
