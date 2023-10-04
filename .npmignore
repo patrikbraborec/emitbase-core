@@ -3,14 +3,8 @@ logs
 *.log
 npm-debug.log*
 
-# Dependencies
-node_modules/
-
 # Coverage
 coverage
-
-# Transpiled files
-build/
 
 # VS Code
 .vscode
@@ -27,10 +21,3 @@ build/
 
 # Misc
 .DS_Store
-
-# NPM
-.npmrc
-
-# Other
-
-tools/playground

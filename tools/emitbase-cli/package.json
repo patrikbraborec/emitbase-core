@@ -1,0 +1,38 @@
+{
+  "name": "@emitbase/emitbase-cli",
+  "version": "0.0.1-alpha-v7",
+  "description": "Command Line Interface for Emitbase",
+  "repository": "https://github.com/emitbase/emitbase-core.git",
+  "type": "module",
+  "bin": {
+    "emitbase": "./build/src/main.js"
+  },
+  "engines": {
+    "node": ">= 18.12 <19"
+  },
+  "scripts": {
+    "start": "node build/src/main.js",
+    "clean": "rimraf build",
+    "build": "tsc -p tsconfig.json && npm run postbuild",
+    "build:release": "npm run clean && tsc -p tsconfig.release.json",
+    "postbuild": "cp -R ./template ./build/src",
+    "lint": "eslint . --ext .ts --ext .mts",
+    "publish:public": "npm publish --access public"
+  },
+  "author": "Patrik Braborec <patrikbraborec@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "fs-extra": "^11.1.1",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.2",
+    "@types/node": "^20.8.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "typescript": "^5.2.2"
+  }
+}
