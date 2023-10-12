@@ -1,6 +1,6 @@
 # Emitbase Core
 
-Emitbase is an open-source tool for declarative alerts and notifications.
+Emitbase is an open-source tool for programmatic alerts and notifications.
 
 ## Introducing Emitbase 0.0.1-alpha 🚀
 
