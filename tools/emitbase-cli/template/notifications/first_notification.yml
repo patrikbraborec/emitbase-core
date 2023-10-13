@@ -1,4 +1,4 @@
-first_notification:
+first_threshold:
   email:
     reciever: ''
     message: ''
