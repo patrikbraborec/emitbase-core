@@ -13,6 +13,13 @@ export interface EmailConnectionDetails {
   password: string;
 }
 
+export interface SlackConnectionDetails {
+  port: number;
+  channel: string;
+  signingSecret: string;
+  token: string;
+}
+
 export interface EmitbaseProfiles {
   emitbase: {
     databases: {
@@ -21,6 +28,7 @@ export interface EmitbaseProfiles {
     notifications: {
       [key: string]: {
         email: EmailConnectionDetails;
+        slack: SlackConnectionDetails;
       };
     };
     target: string;
@@ -40,6 +48,9 @@ export interface Notification {
       reciever: string;
       message: string;
     };
+    slack: {
+      message: string;
+    };
   };
 }
 
@@ -50,6 +61,9 @@ export interface Job {
   notifications: {
     email: {
       reciever: string;
+      message: string;
+    };
+    slack: {
       message: string;
     };
   };

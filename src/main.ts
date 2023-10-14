@@ -20,7 +20,8 @@ const declarativeFiles = process.argv[2];
   const connectionDetails = loadProfile(path.join(declarativeFiles, 'profiles.yml'));
   const connectionDetailsTarget: string = connectionDetails.emitbase.target;
   const selectedDatabaseConnectionDetails = connectionDetails.emitbase.databases[connectionDetailsTarget];
-  const selectedNotificationsConnectionDetails = connectionDetails.emitbase.notifications[connectionDetailsTarget].email;
+  const emailConnectionDetails = connectionDetails.emitbase.notifications[connectionDetailsTarget].email;
+  const slackConnectionDetails = connectionDetails.emitbase.notifications[connectionDetailsTarget].slack;
   // TODO: Add TypeGuard
   const thresholds = loadDefintions(path.join(declarativeFiles, 'thresholds')) as Threshold[];
   // TODO: Add TypeGuard
@@ -28,7 +29,7 @@ const declarativeFiles = process.argv[2];
   const jobs = getJobs(thresholds, notifications);
 
   try {
-    registerThreshold(jobs, selectedDatabaseConnectionDetails, selectedNotificationsConnectionDetails);
+    registerThreshold(jobs, selectedDatabaseConnectionDetails, emailConnectionDetails, slackConnectionDetails);
     console.log('Emitbase is running! 🚀');
   } catch (error) {
     process.exit(1);
