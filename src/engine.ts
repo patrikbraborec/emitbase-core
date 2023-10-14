@@ -3,6 +3,24 @@ import { EmailConnectionDetails, Job, PostgreSQLConnectionDetails, SlackConnecti
 import { closePostgreSQLClient, getPostgreSQLClient } from './databases.js';
 import { sendEmail, sendSlackMessage } from './notifications.js';
 
+async function sendMessages(job: Job, emailConnectionDetails: EmailConnectionDetails, slackConnectionDetails: SlackConnectionDetails): Promise<void> {
+  if (job.notifications.email) {
+    if (emailConnectionDetails) {
+      sendEmail(job, emailConnectionDetails);
+    } else {
+      console.log(job.notifications.email.message);
+    }
+  }
+
+  if (job.notifications.slack) {
+    if (slackConnectionDetails) {
+      sendSlackMessage(job, slackConnectionDetails);
+    } else {
+      console.log(job.notifications.slack.message);
+    }
+  }
+}
+
 async function runJob(
   job: Job,
   selectedDatabaseConnectionDetails: PostgreSQLConnectionDetails,
@@ -10,16 +28,19 @@ async function runJob(
   slackConnectionDetails: SlackConnectionDetails,
 ): Promise<void> {
   try {
+    if (!job.notifications.email && !job.notifications.slack) {
+      throw new Error('Notification files do not contain any messages. Email or Slack messages are required.');
+    }
+
     const database = await getPostgreSQLClient(selectedDatabaseConnectionDetails);
-
     const result = await database.query(job.expression);
-
     /**
      * The main logic of Emitbase core. If a SELECT query returs *any* rows from a database, a notifications are send.
      */
-    if (result.rows.length > 0) {
-      sendEmail(job, emailConnectionDetails);
-      sendSlackMessage(job, slackConnectionDetails);
+    const shouldSendMessages = result.rows.length > 0;
+
+    if (shouldSendMessages) {
+      sendMessages(job, emailConnectionDetails, slackConnectionDetails);
     }
 
     closePostgreSQLClient(database);
@@ -44,10 +65,10 @@ export function registerThreshold(
           runJob(job, selectedDatabaseConnectionDetails, emailConnectionDetails, slackConnectionDetails);
         });
       } else {
-        throw new Error(`cron ${job.cron} is not valid`);
+        throw new Error(`cron ${job.cron} is not valid.`);
       }
     } catch (error) {
-      console.error(`cron ${job.cron} is not valid`);
+      console.error(`cron ${job.cron} is not valid.`);
       throw error;
     }
   });

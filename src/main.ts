@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { loadProfile, loadDefintions } from './files.js';
+import { loadProfile, loadThresholds, loadNotifications } from './files.js';
 import { registerThreshold } from './engine.js';
 import { getJobs } from './services.js';
-import { Threshold, Notification } from './models.js';
 import path from 'path';
+import { EmailConnectionDetails, SlackConnectionDetails } from './models.js';
 
 if (process.argv.length === 2) {
   console.error('Expected folder with profiles and declarative files');
@@ -17,19 +17,29 @@ const declarativeFiles = process.argv[2];
   /**
    * TODO: Obvious problem is that currently the whole system supports only PostgreSQL connections / quesries. For POC it is sufficient.
    */
-  const connectionDetails = loadProfile(path.join(declarativeFiles, 'profiles.yml'));
-  const connectionDetailsTarget: string = connectionDetails.emitbase.target;
-  const selectedDatabaseConnectionDetails = connectionDetails.emitbase.databases[connectionDetailsTarget];
-  const emailConnectionDetails = connectionDetails.emitbase.notifications[connectionDetailsTarget].email;
-  const slackConnectionDetails = connectionDetails.emitbase.notifications[connectionDetailsTarget].slack;
-  // TODO: Add TypeGuard
-  const thresholds = loadDefintions(path.join(declarativeFiles, 'thresholds')) as Threshold[];
-  // TODO: Add TypeGuard
-  const notifications = loadDefintions(path.join(declarativeFiles, 'notifications')) as Notification[];
-  const jobs = getJobs(thresholds, notifications);
+  const profile = loadProfile(path.join(declarativeFiles, 'profiles.yml'));
+  const profileTarget: string = profile.emitbase.target;
+  const selectedDatabaseConnectionDetails = profile.emitbase.databases[profileTarget];
+  const thresholds = loadThresholds(path.join(declarativeFiles, 'thresholds'));
+  const notifications = loadNotifications(path.join(declarativeFiles, 'notifications'));
+
+  let emailConnectionDetails: EmailConnectionDetails;
+  let slackConnectionDetails: SlackConnectionDetails;
+
+  if (profile.emitbase.notifications) {
+    if (profile.emitbase.notifications[profileTarget].email) {
+      emailConnectionDetails = profile.emitbase.notifications[profileTarget].email;
+    }
+    if (profile.emitbase.notifications[profileTarget].slack) {
+      slackConnectionDetails = profile.emitbase.notifications[profileTarget].slack;
+    }
+  }
 
   try {
+    const jobs = getJobs(thresholds, notifications);
+
     registerThreshold(jobs, selectedDatabaseConnectionDetails, emailConnectionDetails, slackConnectionDetails);
+
     console.log('Emitbase is running! 🚀');
   } catch (error) {
     process.exit(1);

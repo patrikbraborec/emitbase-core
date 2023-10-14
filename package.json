@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@slack/bolt": "^3.14.0",
+    "joi": "^17.11.0",
     "js-yaml": "^4.1.0",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.9.5",
