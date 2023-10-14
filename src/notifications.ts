@@ -14,6 +14,9 @@ export async function sendEmail(job: Job, emailConnectionDetails: EmailConnectio
     });
 
     await transport.sendMail({
+      /**
+       * TODO: fix "from"
+       */
       from: '"Patrik Braborec" <patrikbraborec@gmail.com>',
       to: job.notifications.email.reciever,
       subject: '🔥 Message from Emitbase! 🔥',

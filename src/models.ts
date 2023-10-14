@@ -25,10 +25,10 @@ export interface EmitbaseProfiles {
     databases: {
       [key: string]: PostgreSQLConnectionDetails;
     };
-    notifications: {
+    notifications?: {
       [key: string]: {
-        email: EmailConnectionDetails;
-        slack: SlackConnectionDetails;
+        email?: EmailConnectionDetails;
+        slack?: SlackConnectionDetails;
       };
     };
     target: string;
