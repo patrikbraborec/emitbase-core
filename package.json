@@ -1,6 +1,6 @@
 {
   "name": "@emitbase/emitbase-core",
-  "version": "0.0.1-alpha-v2",
+  "version": "0.0.1-alpha-v3",
   "description": "An open-source tool for declarative alerts and notifications",
   "repository": "https://github.com/emitbase/emitbase-core.git",
   "type": "module",
@@ -43,6 +43,7 @@
     "typescript": "~5.1"
   },
   "dependencies": {
+    "@slack/bolt": "^3.14.0",
     "js-yaml": "^4.1.0",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.9.5",

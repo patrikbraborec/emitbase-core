@@ -12,10 +12,10 @@ describe('services', () => {
   ];
   const mockedNotifications: Notification[] = [
     {
-      temp_high: { email: { reciever: 'to@mail.com', message: 'the temperature is too high' } },
+      temp_high: { email: { reciever: 'to@mail.com', message: 'the temperature is too high' }, slack: { message: 'the temperature is too high' } },
     },
     {
-      temp_low: { email: { reciever: 'to@mail.com', message: 'the temperature is too low' } },
+      temp_low: { email: { reciever: 'to@mail.com', message: 'the temperature is too low' }, slack: { message: 'the temperature is too low' } },
     },
   ];
 
@@ -25,13 +25,13 @@ describe('services', () => {
         id: 'temp_high',
         expression: 'select * from demo where temp > 10',
         cron: '0 * * * *',
-        notifications: { email: { reciever: 'to@mail.com', message: 'the temperature is too high' } },
+        notifications: { email: { reciever: 'to@mail.com', message: 'the temperature is too high' }, slack: { message: 'the temperature is too high' } },
       },
       {
         id: 'temp_low',
         expression: 'select * from demo where temp < 5',
         cron: '0 * * * *',
-        notifications: { email: { reciever: 'to@mail.com', message: 'the temperature is too low' } },
+        notifications: { email: { reciever: 'to@mail.com', message: 'the temperature is too low' }, slack: { message: 'the temperature is too low' } },
       },
     ];
 

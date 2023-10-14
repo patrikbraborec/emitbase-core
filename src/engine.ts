@@ -1,20 +1,25 @@
 import nodeCron from 'node-cron';
-import { EmailConnectionDetails, Job, PostgreSQLConnectionDetails } from './models.js';
+import { EmailConnectionDetails, Job, PostgreSQLConnectionDetails, SlackConnectionDetails } from './models.js';
 import { closePostgreSQLClient, getPostgreSQLClient } from './databases.js';
-import { sendEmail } from './notifications.js';
+import { sendEmail, sendSlackMessage } from './notifications.js';
 
 async function runJob(
   job: Job,
   selectedDatabaseConnectionDetails: PostgreSQLConnectionDetails,
-  selectedNotificationsConnectionDetails: EmailConnectionDetails,
+  emailConnectionDetails: EmailConnectionDetails,
+  slackConnectionDetails: SlackConnectionDetails,
 ): Promise<void> {
   try {
     const database = await getPostgreSQLClient(selectedDatabaseConnectionDetails);
 
     const result = await database.query(job.expression);
 
+    /**
+     * The main logic of Emitbase core. If a SELECT query returs *any* rows from a database, a notifications are send.
+     */
     if (result.rows.length > 0) {
-      sendEmail(job, selectedNotificationsConnectionDetails);
+      sendEmail(job, emailConnectionDetails);
+      sendSlackMessage(job, slackConnectionDetails);
     }
 
     closePostgreSQLClient(database);
@@ -27,7 +32,8 @@ async function runJob(
 export function registerThreshold(
   jobs: Job[],
   selectedDatabaseConnectionDetails: PostgreSQLConnectionDetails,
-  selectedNotificationsConnectionDetails: EmailConnectionDetails,
+  emailConnectionDetails: EmailConnectionDetails,
+  slackConnectionDetails: SlackConnectionDetails,
 ): void {
   jobs.forEach((job) => {
     try {
@@ -35,7 +41,7 @@ export function registerThreshold(
 
       if (isCronValid) {
         nodeCron.schedule(job.cron, () => {
-          runJob(job, selectedDatabaseConnectionDetails, selectedNotificationsConnectionDetails);
+          runJob(job, selectedDatabaseConnectionDetails, emailConnectionDetails, slackConnectionDetails);
         });
       } else {
         throw new Error(`cron ${job.cron} is not valid`);

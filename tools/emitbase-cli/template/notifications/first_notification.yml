@@ -2,3 +2,5 @@ first_threshold:
   email:
     reciever: ''
     message: ''
+  slack:
+    message: ''
