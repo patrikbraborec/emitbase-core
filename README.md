@@ -75,7 +75,7 @@ The `0.0.1-alpha` is truly alpha, and there is still a lot of work to be done! T
 - [x] CLI (a CLI tool would create a demo-like folder with a built-in Docker file that you could run)
 - [x] Slack messaging
 - [x] Validation (there is missing validation for almost all inputs)
-- [ ] Ensure that Emitbase performs only `SELECT` queries.
+- [x] Ensure that Emitbase performs only `SELECT` queries.
 - [ ] Tests for core functionalities
 - [ ] Documentation
 - [ ] Landing page

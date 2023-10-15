@@ -68,7 +68,7 @@ export function registerThreshold(
         throw new Error(`cron ${job.cron} is not valid.`);
       }
     } catch (error) {
-      console.error(`cron ${job.cron} is not valid.`);
+      console.error(`Error in register threshold: ${error}`);
       throw error;
     }
   });
