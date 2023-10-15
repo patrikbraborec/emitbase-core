@@ -10,7 +10,6 @@ export function getJobs(thresholds: Threshold[], notifications: Notification[]):
   const notificationIds = notifications.map((notification) => Object.keys(notification).join(''));
 
   if (validateIds(thresholdIds, notificationIds)) {
-    console.error('Invalid threshold or notification objects');
     return [];
   }
 

@@ -45,6 +45,7 @@ export interface Threshold {
 export interface Notification {
   [id: string]: {
     email: {
+      from: string;
       reciever: string;
       message: string;
     };
@@ -60,6 +61,7 @@ export interface Job {
   cron: string;
   notifications: {
     email: {
+      from: string;
       reciever: string;
       message: string;
     };
