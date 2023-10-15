@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { nodemailer } from 'nodemailer';
 import { EmailConnectionDetails, Job, SlackConnectionDetails } from './models.js';
 import slack from '@slack/bolt';
 
@@ -14,10 +14,7 @@ export async function sendEmail(job: Job, emailConnectionDetails: EmailConnectio
     });
 
     await transport.sendMail({
-      /**
-       * TODO: fix "from"
-       */
-      from: '"Patrik Braborec" <patrikbraborec@gmail.com>',
+      from: job.notifications.email.from,
       to: job.notifications.email.reciever,
       subject: '🔥 Message from Emitbase! 🔥',
       text: job.notifications.email.message,
@@ -45,5 +42,23 @@ export async function sendSlackMessage(job: Job, slackConnectionDetails: SlackCo
     });
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function sendMessages(job: Job, emailConnectionDetails: EmailConnectionDetails, slackConnectionDetails: SlackConnectionDetails): Promise<void> {
+  if (job.notifications.email) {
+    if (emailConnectionDetails) {
+      sendEmail(job, emailConnectionDetails);
+    } else {
+      console.log(job.notifications.email.message);
+    }
+  }
+
+  if (job.notifications.slack) {
+    if (slackConnectionDetails) {
+      sendSlackMessage(job, slackConnectionDetails);
+    } else {
+      console.log(job.notifications.slack.message);
+    }
   }
 }

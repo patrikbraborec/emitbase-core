@@ -106,6 +106,7 @@ const notificationsSchema = Joi.array().items(
     Joi.string(),
     Joi.object({
       email: Joi.object({
+        from: Joi.string(),
         reciever: Joi.string(),
         message: Joi.string(),
       }).optional(),

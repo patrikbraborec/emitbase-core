@@ -1,6 +1,6 @@
 # Emitbase Core
 
-Emitbase is an open-source tool for programmatic alerts and notifications.
+Emitbase is an open-source platform for programmatic alerts and notifications.
 
 ## Introducing Emitbase 0.0.1-alpha 🚀
 
@@ -76,6 +76,6 @@ The `0.0.1-alpha` is truly alpha, and there is still a lot of work to be done! T
 - [x] Slack messaging
 - [x] Validation (there is missing validation for almost all inputs)
 - [x] Ensure that Emitbase performs only `SELECT` queries.
-- [ ] Tests for core functionalities
+- [x] Tests for core functionalities
 - [ ] Documentation
 - [ ] Landing page
