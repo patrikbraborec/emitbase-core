@@ -7,6 +7,7 @@ export async function getPostgreSQLClient(connectionDetails: PostgreSQLConnectio
     const client = new pg.Client(connectionString);
 
     await client.connect();
+    await client.query('SET SESSION CHARACTERISTICS AS TRANSACTION READ ONLY');
 
     return client;
   } catch (error) {
