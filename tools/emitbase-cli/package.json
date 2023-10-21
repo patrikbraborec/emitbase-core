@@ -1,6 +1,6 @@
 {
   "name": "@emitbase/emitbase-cli",
-  "version": "0.0.1-alpha-v8",
+  "version": "0.0.1-alpha-v9",
   "description": "Command Line Interface for Emitbase",
   "repository": "https://github.com/emitbase/emitbase-core.git",
   "type": "module",
