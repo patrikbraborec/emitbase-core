@@ -1,6 +1,6 @@
 {
   "name": "@emitbase/emitbase-core",
-  "version": "0.0.1-alpha-v4",
+  "version": "0.0.1-alpha-v5",
   "description": "An open-source tool for declarative alerts and notifications",
   "repository": "https://github.com/emitbase/emitbase-core.git",
   "type": "module",
