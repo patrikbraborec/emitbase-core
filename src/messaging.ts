@@ -1,4 +1,4 @@
-import { nodemailer } from 'nodemailer';
+import nodemailer from 'nodemailer';
 import { EmailConnectionDetails, Job, SlackConnectionDetails } from './models.js';
 import slack from '@slack/bolt';
 

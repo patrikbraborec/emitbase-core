@@ -1,4 +1,3 @@
-// import { Client } from 'pg';
 import { EmailConnectionDetails, Job, PostgreSQLConnectionDetails, SlackConnectionDetails } from '../src/models.js';
 import * as engineApi from '../src/engine.js';
 import * as messagingApi from '../src/messaging.js';
