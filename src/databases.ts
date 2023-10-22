@@ -1,10 +1,10 @@
-import { Client } from 'pg';
+import * as pg from 'pg';
 import { PostgreSQLConnectionDetails } from './models.js';
 
-export async function getPostgreSQLClient(connectionDetails: PostgreSQLConnectionDetails): Promise<Client> {
+export async function getPostgreSQLClient(connectionDetails: PostgreSQLConnectionDetails): Promise<pg.Client> {
   try {
     const connectionString = `postgresql://${connectionDetails.user}:${connectionDetails.password}@${connectionDetails.host}:${connectionDetails.port}/${connectionDetails.database}`;
-    const client = new Client(connectionString);
+    const client = new pg.Client(connectionString);
 
     await client.connect();
     await client.query('SET SESSION CHARACTERISTICS AS TRANSACTION READ ONLY');
@@ -16,7 +16,7 @@ export async function getPostgreSQLClient(connectionDetails: PostgreSQLConnectio
   }
 }
 
-export async function closePostgreSQLClient(client: Client): Promise<void> {
+export async function closePostgreSQLClient(client: pg.Client): Promise<void> {
   try {
     await client.end();
   } catch (error) {
