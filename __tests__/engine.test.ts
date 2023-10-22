@@ -57,12 +57,12 @@ describe('engine', () => {
 
     await engineApi.runJob(mockedJob, mockedDatabaseConnectionDetails, mockedEmailConnectionDetails, mockedSlackConnectionDetails);
 
-    expect(mockedPostgresClient.connect).toBeCalledTimes(1);
+    expect(mockedPostgresClient.connect).toHaveBeenCalledTimes(1);
     /**
      * query is called two-times because it sets READ ONLY transactions
      */
-    expect(mockedPostgresClient.query).toBeCalledTimes(2);
-    expect(mockedPostgresClient.end).toBeCalledTimes(1);
+    expect(mockedPostgresClient.query).toHaveBeenCalledTimes(2);
+    expect(mockedPostgresClient.end).toHaveBeenCalledTimes(1);
   });
 
   test('should send messages if query returns any rows', async () => {
@@ -72,7 +72,7 @@ describe('engine', () => {
 
     await engineApi.runJob(mockedJob, mockedDatabaseConnectionDetails, mockedEmailConnectionDetails, mockedSlackConnectionDetails);
 
-    expect(spySendMessages).toBeCalledTimes(1);
+    expect(spySendMessages).toHaveBeenCalledTimes(1);
   });
 
   test('should not send messages if query returns no rows', async () => {
@@ -82,6 +82,6 @@ describe('engine', () => {
 
     await engineApi.runJob(mockedJob, mockedDatabaseConnectionDetails, mockedEmailConnectionDetails, mockedSlackConnectionDetails);
 
-    expect(spySendMessages).toBeCalledTimes(0);
+    expect(spySendMessages).toHaveBeenCalledTimes(0);
   });
 });
