@@ -1,5 +1,5 @@
 export default {
-  testEnvironment: 'node',
+  testEnvironment: 'jest-environment-node',
   preset: 'ts-jest/presets/default-esm',
   transform: {
     '^.+\\.m?[tj]s?$': ['ts-jest', { useESM: true }],
