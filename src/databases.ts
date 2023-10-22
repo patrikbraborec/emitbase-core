@@ -1,4 +1,4 @@
-import * as pg from 'pg';
+import pg from 'pg';
 import { PostgreSQLConnectionDetails } from './models.js';
 
 export async function getPostgreSQLClient(connectionDetails: PostgreSQLConnectionDetails): Promise<pg.Client> {

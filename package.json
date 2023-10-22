@@ -1,6 +1,6 @@
 {
   "name": "@emitbase/emitbase-core",
-  "version": "0.0.1-alpha-v6",
+  "version": "0.0.1-alpha-v7",
   "description": "An open-source tool for declarative alerts and notifications",
   "repository": "https://github.com/emitbase/emitbase-core.git",
   "type": "module",
@@ -30,7 +30,7 @@
     "@types/node": "~18",
     "@types/node-cron": "^3.0.8",
     "@types/nodemailer": "^6.4.13",
-    "@types/pg": "^8.10.2",
+    "@types/pg": "^8.10.7",
     "@typescript-eslint/eslint-plugin": "~6.2",
     "@typescript-eslint/parser": "~6.2",
     "eslint": "^8.50.0",
