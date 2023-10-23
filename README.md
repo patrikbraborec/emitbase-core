@@ -29,4 +29,4 @@ Emitbase may be a good fit if you are:
 
 - Start with [Getting Started](https://emitbase.github.io/emitbase-website/docs/getting-started).
 - Give ⭐️ to the Emitbase project on GitHub ❤️.
-- Connect with us in the [Community]([/docs/community/slack](https://emitbase.github.io/emitbase-website/docs/community/slack)).
+- Connect with us in the [Community](https://emitbase.github.io/emitbase-website/docs/community/slack).
