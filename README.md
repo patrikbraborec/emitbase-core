@@ -1,81 +1,32 @@
 # Emitbase Core
 
-Emitbase is an open-source platform for programmatic alerts and notifications.
+Emitbase is an open-source alerts platform for developers. It allows you to connect to a database, define the logic of alerts in SQL, and specify channels for alerts (Email or [Slack](https://slack.com/)). 
 
-## Introducing Emitbase 0.0.1-alpha 🚀
+## Who is it for?
 
-I have spent a few hours on a tool that I named Emitbase. My vision is to create a simple and declarative tool for alerts, notifications, and messaging for developer products. It is not something random. When I built my last product (a failed startup), I always wished such a tool existed; a tool that does not interfere with your business logic but serves as a simple layer directly above your database, where you can define simple logic for alerting, messaging, and notifications.
+Emitbase may be a good fit if you are:
 
-## Developer Experience (DX) 💻
+- A developer wishing to create all alerts in one place.
+- A developer wishing to create alerts without interfering with the business logic of your application.
+- A developer wishing to create alerts in a declarative manner.
 
-I aim for the best possible developer experience. In recent months, I had the pleasure of working with [dbt](https://www.getdbt.com/), and it was truly inspirational for me regarding DX. If you check the `demo` folder, you can see its significant influence.
+## How does it work?
 
-### Thresholds
+1. You write SQL to define an alert, for example: `SELECT temp FROM metrics WHERE temp > 30`.
+2. You specify how often the SQL should run using CRON notation, such as: `*/5 * * * *`.
+3. You define channels and messages that should be sent (Email or Slack).
+4. The SQL query runs every time you specify in CRON:
+   1. If the SQL query returns any rows, the messages are sent.
+   2. If the SQL query does not return rows, the messages are not sent.
 
-A threshold is a YAML file where you define the threshold for when a particular alert/notification (still not decided on how to call it) should be sent. You can write *any* SQL `SELECT` query, and if the result contains something (i.e., if the `SELECT` query returns a row from the database), the alert/notification is sent.
+## Limits
 
-```yaml
-temp_high:
-  expression: 'select * from demo where temp > 10'
-  cron: '* * * * *'
-```
+- Emitbase is still in **beta**. We do not recommend using it for critical production systems.
+- Emitbase currently work only with [PostgreSQL](https://www.postgresql.org/) database.
+- Emitbase currently support only Email and Slack messages.
 
-### Notifications
+## Next steps
 
-A notification is a YAML file where you define what notifications should be sent. In the current version, Emitbase supports only email notifications, but in the future, it can be Slack, Github, your system, etc.
-
-```yaml
-temp_high:
-  email:
-    reciever: 'patrikbraborec@gmail.com'
-    message: 'the temperature is too high'
-```
-
-## Try it!
-
-You can create `profiles.yml` file in the `demo` folder:
-
-```yaml
-emitbase:
-  databases:
-    dev:
-      host: 
-      database: 
-      port: 
-      user: 
-      password: 
-
-  notifications:
-    dev:
-      email:
-        host: 
-        port: 
-        user: 
-        password: 
-
-  target: dev
-```
-
-If you define your connection details, you can then simply run it:
-
-```bash
-$ npm install
-$ npm run build
-$ npm start
-```
-## Why announce it so soon?
-
-Well, I love the idea of building things in public. Also, I know that I can sometimes think about things the wrong way, and this early release may serve as a feedback loop, which is usually very valuable. Lastly, there is still some chance (though small) that I will find some contributors who would love this idea as much as I do.
-
-## Next Steps
-
-The `0.0.1-alpha` is truly alpha, and there is still a lot of work to be done! The following list contains a high-level plan for the next steps (to actually release `0.0.1`):
-
-- [x] Docker image (right now, the Docker image is not working properly)
-- [x] CLI (a CLI tool would create a demo-like folder with a built-in Docker file that you could run)
-- [x] Slack messaging
-- [x] Validation (there is missing validation for almost all inputs)
-- [x] Ensure that Emitbase performs only `SELECT` queries.
-- [x] Tests for core functionalities
-- [ ] Documentation
-- [ ] Landing page
+- Start with [Getting Started](https://emitbase.github.io/emitbase-website/docs/getting-started).
+- Give ⭐️ to the Emitbase project on GitHub ❤️.
+- Connect with us in the [Community]([/docs/community/slack](https://emitbase.github.io/emitbase-website/docs/community/slack)).

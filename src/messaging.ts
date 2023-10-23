@@ -40,6 +40,8 @@ export async function sendSlackMessage(job: Job, slackConnectionDetails: SlackCo
       channel: slackConnectionDetails.channel,
       text: job.notifications.slack.message,
     });
+
+    await app.stop();
   } catch (error) {
     console.error(error);
   }

@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# Dependencies
+node_modules/
+
 # Coverage
 coverage
 
@@ -21,3 +24,6 @@ coverage
 
 # Misc
 .DS_Store
+
+# tools
+tools/

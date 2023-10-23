@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# Dependencies
+node_modules/
+
 # VS Code
 .vscode
 !.vscode/tasks.js
