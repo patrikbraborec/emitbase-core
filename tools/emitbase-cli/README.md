@@ -21,7 +21,7 @@ $ yarn add global @emitbase/emitbase-cli
 ### Step 2: Init of a new Emitbase project
 
 ```bash
-$ npx emitbase <PROJECT-NAME>
+$ npx emitbase init <PROJECT-NAME>
 ```
 
 ## Conclusion

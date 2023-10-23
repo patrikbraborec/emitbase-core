@@ -7,6 +7,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install @emitbase/emitbase-core@0.0.1-alpha-v2
+RUN npm install @emitbase/emitbase-core@0.1.1
 
 CMD [ "npx", "emitbase-core", "./" ]
